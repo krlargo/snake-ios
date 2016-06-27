@@ -16,6 +16,11 @@
 		539CF9E21D0A55E500DA1B66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539CF9E01D0A55E500DA1B66 /* LaunchScreen.storyboard */; };
 		539CF9ED1D0A55E500DA1B66 /* SnakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9EC1D0A55E500DA1B66 /* SnakeTests.swift */; };
 		539CF9F81D0A55E500DA1B66 /* SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9F71D0A55E500DA1B66 /* SnakeUITests.swift */; };
+		539CFA481D13393C00DA1B66 /* StartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */; };
+		539CFA4A1D13396200DA1B66 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA491D13396200DA1B66 /* SettingViewController.swift */; };
+		539CFA4C1D13397600DA1B66 /* HighScoresViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */; };
+		539CFA4E1D133AEC00DA1B66 /* SnakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */; };
+		539CFA501D138CE400DA1B66 /*  SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		539CF9F31D0A55E500DA1B66 /* SnakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		539CF9F71D0A55E500DA1B66 /* SnakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeUITests.swift; sourceTree = "<group>"; };
 		539CF9F91D0A55E500DA1B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenViewController.swift; sourceTree = "<group>"; };
+		539CFA491D13396200DA1B66 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoresViewContoller.swift; sourceTree = "<group>"; };
+		539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnakeModel.swift; sourceTree = "<group>"; };
+		539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = " SKButtonNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +114,12 @@
 				539CF9D31D0A55E400DA1B66 /* AppDelegate.swift */,
 				539CF9D51D0A55E400DA1B66 /* GameScene.sks */,
 				539CF9D71D0A55E400DA1B66 /* GameScene.swift */,
+				539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */,
+				539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */,
+				539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */,
 				539CF9D91D0A55E400DA1B66 /* GameViewController.swift */,
+				539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */,
+				539CFA491D13396200DA1B66 /* SettingViewController.swift */,
 				539CF9DB1D0A55E400DA1B66 /* Main.storyboard */,
 				539CF9DE1D0A55E500DA1B66 /* Assets.xcassets */,
 				539CF9E01D0A55E500DA1B66 /* LaunchScreen.storyboard */,
@@ -266,9 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				539CFA4E1D133AEC00DA1B66 /* SnakeModel.swift in Sources */,
+				539CFA4A1D13396200DA1B66 /* SettingViewController.swift in Sources */,
 				539CF9D81D0A55E400DA1B66 /* GameScene.swift in Sources */,
+				539CFA4C1D13397600DA1B66 /* HighScoresViewContoller.swift in Sources */,
 				539CF9DA1D0A55E400DA1B66 /* GameViewController.swift in Sources */,
 				539CF9D41D0A55E400DA1B66 /* AppDelegate.swift in Sources */,
+				539CFA501D138CE400DA1B66 /*  SKButtonNode.swift in Sources */,
+				539CFA481D13393C00DA1B66 /* StartScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
