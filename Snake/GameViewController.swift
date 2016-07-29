@@ -6,16 +6,15 @@
 //  Copyright (c) 2016 xkevlar. All rights reserved.
 //
 
-/*
- - Responsible for managing what UIObjects do
- - Contains instantiation of SnakeGameModel
-*/
-
 import UIKit
 import SpriteKit
 
+
+//Directly associated with GameScene
 class GameViewController: UIViewController {
- 
+
+  weak var snakeModel : SnakeModel?
+
     override func viewDidLoad() {
       super.viewDidLoad()
       

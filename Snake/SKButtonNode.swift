@@ -5,6 +5,7 @@
 //  Created by Kevin Largo on 6/16/16.
 //  Copyright © 2016 xkevlar. All rights reserved.
 //
+//  Combination of SKShapeNode (for border), SKLabelNode (for text), and SKSPriteNode (for image)
 
 import Foundation
 import SpriteKit
@@ -12,6 +13,7 @@ import SpriteKit
 class SKButtonNode: SKNode {
   var shapeNode: SKShapeNode;
   var labelNode: SKLabelNode;
+  var spriteNode: SKSpriteNode;
   var height: CGFloat;
   var width: CGFloat;
   var minX: CGFloat;
@@ -20,11 +22,13 @@ class SKButtonNode: SKNode {
   var minY: CGFloat;
   var midY: CGFloat;
   var maxY: CGFloat;
-
+  var imageName: String;
+  
   override init()
   {
     shapeNode = SKShapeNode();
     labelNode = SKLabelNode();
+    spriteNode = SKSpriteNode();
     height = CGFloat();
     width = CGFloat();
     minX = CGFloat();
@@ -33,15 +37,16 @@ class SKButtonNode: SKNode {
     minY = CGFloat();
     midY = CGFloat();
     maxY = CGFloat();
+    imageName = "";
     
     super.init();
   }
   
   //size of actual button
-//  init(rectOfSize: CGSize, cornerRadius: CGFloat) {
   init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat) {
     shapeNode = SKShapeNode(rectOfSize: CGSize(width: width, height: height), cornerRadius: cornerRadius);
     labelNode = SKLabelNode(text: "");
+    spriteNode = SKSpriteNode();
     
     self.width = width;
     self.height = height;
@@ -62,14 +67,23 @@ class SKButtonNode: SKNode {
     midY = 0;
     maxY = 0;
     
+    imageName = "";
+    
     super.init();
     
     addChild(shapeNode);
     addChild(labelNode);
+    addChild(spriteNode);
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func setImage(imageName: String, size: CGSize) {
+    spriteNode.texture = SKTexture(imageNamed: imageName);
+    spriteNode.size = size;
+    spriteNode.zPosition = 2; //same zPos as labelNode; BELOW shapeNode
   }
   
   func setText(text: String) {
@@ -84,6 +98,7 @@ class SKButtonNode: SKNode {
   func setPos(point: CGPoint) {
     shapeNode.position = point;
     labelNode.position = point;
+    spriteNode.position = point;
     
     minX = shapeNode.position.x - width / 2;
     maxX = shapeNode.position.x + width / 2;

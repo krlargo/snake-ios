@@ -7,20 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		531BD7AB1D24C8760013FAB5 /* TwoPlayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531BD7AA1D24C8760013FAB5 /* TwoPlayerGameViewController.swift */; };
+		531BD7AD1D24C8BF0013FAB5 /* TwoPlayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531BD7AC1D24C8BF0013FAB5 /* TwoPlayerGameScene.swift */; };
 		539CF9D41D0A55E400DA1B66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9D31D0A55E400DA1B66 /* AppDelegate.swift */; };
-		539CF9D61D0A55E400DA1B66 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 539CF9D51D0A55E400DA1B66 /* GameScene.sks */; };
-		539CF9D81D0A55E400DA1B66 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9D71D0A55E400DA1B66 /* GameScene.swift */; };
-		539CF9DA1D0A55E400DA1B66 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9D91D0A55E400DA1B66 /* GameViewController.swift */; };
 		539CF9DD1D0A55E400DA1B66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539CF9DB1D0A55E400DA1B66 /* Main.storyboard */; };
 		539CF9DF1D0A55E500DA1B66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539CF9DE1D0A55E500DA1B66 /* Assets.xcassets */; };
 		539CF9E21D0A55E500DA1B66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 539CF9E01D0A55E500DA1B66 /* LaunchScreen.storyboard */; };
 		539CF9ED1D0A55E500DA1B66 /* SnakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9EC1D0A55E500DA1B66 /* SnakeTests.swift */; };
 		539CF9F81D0A55E500DA1B66 /* SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CF9F71D0A55E500DA1B66 /* SnakeUITests.swift */; };
 		539CFA481D13393C00DA1B66 /* StartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */; };
-		539CFA4A1D13396200DA1B66 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA491D13396200DA1B66 /* SettingViewController.swift */; };
+		539CFA4A1D13396200DA1B66 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA491D13396200DA1B66 /* SettingsViewController.swift */; };
 		539CFA4C1D13397600DA1B66 /* HighScoresViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */; };
 		539CFA4E1D133AEC00DA1B66 /* SnakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */; };
-		539CFA501D138CE400DA1B66 /*  SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */; };
+		539CFA501D138CE400DA1B66 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539CFA4F1D138CDE00DA1B66 /* SKButtonNode.swift */; };
+		53BC52BC1D24CF5C0069CE1F /* TwoPlayerGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53BC52BB1D24CF5C0069CE1F /* TwoPlayerGameScene.sks */; };
+		53BC52BE1D25C3690069CE1F /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC52BD1D25C3690069CE1F /* Snake.swift */; };
+		53BC52C01D2614680069CE1F /* OnePlayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC52BF1D2614680069CE1F /* OnePlayerGameScene.swift */; };
+		53BC52C21D2617330069CE1F /* OnePlayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC52C11D2617330069CE1F /* OnePlayerGameViewController.swift */; };
+		53BC52C41D2639380069CE1F /* OnePlayerGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 53BC52C31D2639380069CE1F /* OnePlayerGameScene.sks */; };
+		53BC52C81D2864BD0069CE1F /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC52C71D2864BD0069CE1F /* HighScore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,11 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		531BD7AA1D24C8760013FAB5 /* TwoPlayerGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayerGameViewController.swift; sourceTree = "<group>"; };
+		531BD7AC1D24C8BF0013FAB5 /* TwoPlayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayerGameScene.swift; sourceTree = "<group>"; };
 		539CF9D01D0A55E400DA1B66 /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		539CF9D31D0A55E400DA1B66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		539CF9D51D0A55E400DA1B66 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		539CF9D71D0A55E400DA1B66 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		539CF9D91D0A55E400DA1B66 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		539CF9DC1D0A55E400DA1B66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		539CF9DE1D0A55E500DA1B66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		539CF9E11D0A55E500DA1B66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,10 +61,16 @@
 		539CF9F71D0A55E500DA1B66 /* SnakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeUITests.swift; sourceTree = "<group>"; };
 		539CF9F91D0A55E500DA1B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenViewController.swift; sourceTree = "<group>"; };
-		539CFA491D13396200DA1B66 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		539CFA491D13396200DA1B66 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScoresViewContoller.swift; sourceTree = "<group>"; };
 		539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnakeModel.swift; sourceTree = "<group>"; };
-		539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = " SKButtonNode.swift"; sourceTree = "<group>"; };
+		539CFA4F1D138CDE00DA1B66 /* SKButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
+		53BC52BB1D24CF5C0069CE1F /* TwoPlayerGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TwoPlayerGameScene.sks; sourceTree = "<group>"; };
+		53BC52BD1D25C3690069CE1F /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
+		53BC52BF1D2614680069CE1F /* OnePlayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePlayerGameScene.swift; sourceTree = "<group>"; };
+		53BC52C11D2617330069CE1F /* OnePlayerGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePlayerGameViewController.swift; sourceTree = "<group>"; };
+		53BC52C31D2639380069CE1F /* OnePlayerGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = OnePlayerGameScene.sks; sourceTree = "<group>"; };
+		53BC52C71D2864BD0069CE1F /* HighScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,14 +122,19 @@
 			isa = PBXGroup;
 			children = (
 				539CF9D31D0A55E400DA1B66 /* AppDelegate.swift */,
-				539CF9D51D0A55E400DA1B66 /* GameScene.sks */,
-				539CF9D71D0A55E400DA1B66 /* GameScene.swift */,
-				539CFA4F1D138CDE00DA1B66 /*  SKButtonNode.swift */,
-				539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */,
+				53BC52BD1D25C3690069CE1F /* Snake.swift */,
+				53BC52C71D2864BD0069CE1F /* HighScore.swift */,
 				539CFA471D13393C00DA1B66 /* StartScreenViewController.swift */,
-				539CF9D91D0A55E400DA1B66 /* GameViewController.swift */,
+				539CFA4D1D133AEC00DA1B66 /* SnakeModel.swift */,
+				53BC52C11D2617330069CE1F /* OnePlayerGameViewController.swift */,
+				53BC52BF1D2614680069CE1F /* OnePlayerGameScene.swift */,
+				53BC52C31D2639380069CE1F /* OnePlayerGameScene.sks */,
+				531BD7AA1D24C8760013FAB5 /* TwoPlayerGameViewController.swift */,
+				531BD7AC1D24C8BF0013FAB5 /* TwoPlayerGameScene.swift */,
+				53BC52BB1D24CF5C0069CE1F /* TwoPlayerGameScene.sks */,
 				539CFA4B1D13397600DA1B66 /* HighScoresViewContoller.swift */,
-				539CFA491D13396200DA1B66 /* SettingViewController.swift */,
+				539CFA491D13396200DA1B66 /* SettingsViewController.swift */,
+				539CFA4F1D138CDE00DA1B66 /* SKButtonNode.swift */,
 				539CF9DB1D0A55E400DA1B66 /* Main.storyboard */,
 				539CF9DE1D0A55E500DA1B66 /* Assets.xcassets */,
 				539CF9E01D0A55E500DA1B66 /* LaunchScreen.storyboard */,
@@ -253,9 +268,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				539CF9D61D0A55E400DA1B66 /* GameScene.sks in Resources */,
+				53BC52BC1D24CF5C0069CE1F /* TwoPlayerGameScene.sks in Resources */,
 				539CF9E21D0A55E500DA1B66 /* LaunchScreen.storyboard in Resources */,
 				539CF9DF1D0A55E500DA1B66 /* Assets.xcassets in Resources */,
+				53BC52C41D2639380069CE1F /* OnePlayerGameScene.sks in Resources */,
 				539CF9DD1D0A55E400DA1B66 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,13 +297,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531BD7AB1D24C8760013FAB5 /* TwoPlayerGameViewController.swift in Sources */,
 				539CFA4E1D133AEC00DA1B66 /* SnakeModel.swift in Sources */,
-				539CFA4A1D13396200DA1B66 /* SettingViewController.swift in Sources */,
-				539CF9D81D0A55E400DA1B66 /* GameScene.swift in Sources */,
+				531BD7AD1D24C8BF0013FAB5 /* TwoPlayerGameScene.swift in Sources */,
+				53BC52C21D2617330069CE1F /* OnePlayerGameViewController.swift in Sources */,
+				539CFA4A1D13396200DA1B66 /* SettingsViewController.swift in Sources */,
 				539CFA4C1D13397600DA1B66 /* HighScoresViewContoller.swift in Sources */,
-				539CF9DA1D0A55E400DA1B66 /* GameViewController.swift in Sources */,
+				53BC52C01D2614680069CE1F /* OnePlayerGameScene.swift in Sources */,
 				539CF9D41D0A55E400DA1B66 /* AppDelegate.swift in Sources */,
-				539CFA501D138CE400DA1B66 /*  SKButtonNode.swift in Sources */,
+				539CFA501D138CE400DA1B66 /* SKButtonNode.swift in Sources */,
+				53BC52BE1D25C3690069CE1F /* Snake.swift in Sources */,
+				53BC52C81D2864BD0069CE1F /* HighScore.swift in Sources */,
 				539CFA481D13393C00DA1B66 /* StartScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +537,7 @@
 				539CF9FE1D0A55E600DA1B66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		539CF9FF1D0A55E600DA1B66 /* Build configuration list for PBXNativeTarget "SnakeTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +546,7 @@
 				539CFA011D0A55E600DA1B66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		539CFA021D0A55E600DA1B66 /* Build configuration list for PBXNativeTarget "SnakeUITests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +555,7 @@
 				539CFA041D0A55E600DA1B66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

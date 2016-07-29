@@ -1,41 +1,34 @@
 //
-//  GameScene.swift
+//  OnePlayerGameScene.swift
 //  Snake
 //
-//  Created by Kevin Largo on 6/9/16.
-//  Copyright (c) 2016 xkevlar. All rights reserved.
+//  Created by Kevin Largo on 6/30/16.
+//  Copyright © 2016 xkevlar. All rights reserved.
 //
 
-
-
+import UIKit
 import SpriteKit
 
-class GameScene: SKScene, SKSceneDelegate {
-
-  //used to connect to associated GameViewController
-  weak var gameViewController : GameViewController?
+class OnePlayerGameScene: SKScene, SKSceneDelegate {
+  weak var onePlayerGameViewController: OnePlayerGameViewController?
   
-  var border = SKShapeNode();
-  var snake = [SKShapeNode]();
-  var snakeColor = SKColor.grayColor();
-  var prevColor = SKColor();
-  var alphaValue = CGFloat(1);
-  var alphaDecrementValue = CGFloat(0);
-  var food = SKShapeNode();
+  var snake = Snake();
+  var snakeColor = UIColor.grayColor(); //default color
   let startSize = 5;
-  var direction = 3;
-  var timer = 0;
-  var score = 0;
+  let startDirection = 3;
+  let bgColor = UIColor.groupTableViewBackgroundColor();
+  
+  var field = SKShapeNode();
+  var food = SKShapeNode();
   var scoreLabel = SKLabelNode();
   var pauseButton = SKButtonNode();
-  var gamePaused = false;
-  var holdSignals = false; //holds signals so that animation can catch up
 
-  //gameover data
-  var numFlashes = 0;
-  var flashColor = 0; //0 is colored, 1 is white
+  var timer = 0;
+  var score = 0;
+  var delayRate = 5;
+  var gamePaused = false;
+  var holdSignals = false; //holds responsiveness signals so that animation can catch up
   var gameover = false;
-  var snakeGone = false;
   var gameOverPresented = false;
   
   //relative to center of frame
@@ -43,7 +36,7 @@ class GameScene: SKScene, SKSceneDelegate {
   var maxX = CGFloat();
   var minY = CGFloat();
   var maxY = CGFloat();
-  var fieldCenter = CGPoint();
+  var fieldOffset = CGFloat(100);
   var fieldWidth = 400;
   var fieldHeight = 400;
   var pixelScale = 10; //number of pixels that make a square segment
@@ -55,19 +48,24 @@ class GameScene: SKScene, SKSceneDelegate {
   var swipeLeft = UISwipeGestureRecognizer();
   var swipeRight = UISwipeGestureRecognizer();
   
-  //arrow buttons
+  //display buttons
   var yesButton = SKButtonNode();
   var noButton = SKButtonNode();
+  var pausedLabel = SKLabelNode();
+  var resumeButton = SKButtonNode();
+  var quitButton = SKButtonNode();
+  
+  //arrow buttons
   var upButton = SKButtonNode();
   var downButton = SKButtonNode();
   var leftButton = SKButtonNode();
   var rightButton = SKButtonNode();
-
+  
   
   func swipedUp(sender:UISwipeGestureRecognizer) {
     moveUp();
   }
-    
+  
   func swipedDown(sender:UISwipeGestureRecognizer) {
     moveDown();
   }
@@ -75,7 +73,7 @@ class GameScene: SKScene, SKSceneDelegate {
   func swipedLeft(sender:UISwipeGestureRecognizer) {
     moveLeft();
   }
-
+  
   func swipedRight(sender:UISwipeGestureRecognizer) {
     moveRight();
   }
@@ -84,8 +82,8 @@ class GameScene: SKScene, SKSceneDelegate {
     if(holdSignals || gamePaused) {
       return;
     }
-    if(direction != 1) { //if not going down
-      direction = 0;
+    if(snake.direction != 1) { //if not going down
+      snake.direction = 0;
     }
     holdSignals = true;
   }
@@ -94,8 +92,8 @@ class GameScene: SKScene, SKSceneDelegate {
     if(holdSignals || gamePaused) {
       return;
     }
-    if(direction != 0) { //if not going up
-      direction = 1;
+    if(snake.direction != 0) { //if not going up
+      snake.direction = 1;
     }
     holdSignals = true;
   }
@@ -104,8 +102,8 @@ class GameScene: SKScene, SKSceneDelegate {
     if(holdSignals || gamePaused) {
       return;
     }
-    if(direction != 3) { //if not going right
-      direction = 2;
+    if(snake.direction != 3) { //if not going right
+      snake.direction = 2;
     }
     holdSignals = true;
   }
@@ -114,13 +112,15 @@ class GameScene: SKScene, SKSceneDelegate {
     if(holdSignals || gamePaused) {
       return;
     }
-    if(direction != 2) { //if not going left
-      direction = 3;
+    if(snake.direction != 2) { //if not going left
+      snake.direction = 3;
     }
     holdSignals = true;
   }
   
   override func didMoveToView(view: SKView) {
+    snakeColor = onePlayerGameViewController!.snakeModel!.snakeColor;
+    delayRate = onePlayerGameViewController!.snakeModel!.delayRate;
     initScene();
   }
   
@@ -131,28 +131,11 @@ class GameScene: SKScene, SKSceneDelegate {
       //reload game scene
       if(self.nodeAtPoint(location) == self.yesButton.shapeNode) {
         initScene();
-        
-/*        if let scene = GameScene(fileNamed:"GameScene") {
-          // Configure the view.
-          let skView = self.view! as SKView
-          skView.showsFPS = true
-          skView.showsNodeCount = true
-          
-          
-          /* Sprite Kit applies additional optimizations to improve rendering performance */
-          skView.ignoresSiblingOrder = true
-          
-          /* Set the scale mode to scale to fit the window */
-          scene.scaleMode = .AspectFill
-          
-          skView.presentScene(scene)
-        }*/
       }
       
       //return to Start Screen View Controller
       if(self.nodeAtPoint(location) == self.noButton.shapeNode) {
-//        self.gameViewController?.performSegueWithIdentifier("gameToStartScreen", sender: self);
-        self.gameViewController?.performSegueWithIdentifier("exitToStartScreen", sender: self);
+        self.onePlayerGameViewController?.performSegueWithIdentifier("exitToStartScreen", sender: self);
       }
       
       if(self.nodeAtPoint(location) == self.pauseButton.shapeNode) {
@@ -162,21 +145,34 @@ class GameScene: SKScene, SKSceneDelegate {
         if(gamePaused) {
           pauseButton.setText("PAUSE"); //if the game is already paused, change text to "PAUSE"
           gamePaused = false;
+          removePaused();
         } else {
           pauseButton.setText("UNPAUSE");
           gamePaused = true;
+          presentPaused();
         }
+      }
+      
+      //paused game button
+      if(self.nodeAtPoint(location) == self.resumeButton.shapeNode) {
+        pauseButton.setText("PAUSE");
+        gamePaused = false;
+        removePaused();
+      }
+      
+      if(self.nodeAtPoint(location) == self.quitButton.shapeNode) {
+        self.onePlayerGameViewController?.performSegueWithIdentifier("exitToStartScreen", sender: self);
       }
       
       //arrows
       if(self.nodeAtPoint(location) == self.upButton.shapeNode) {
         moveUp();
       }
-
+      
       if(self.nodeAtPoint(location) == self.downButton.shapeNode) {
         moveDown();
       }
-    
+      
       if(self.nodeAtPoint(location) == self.leftButton.shapeNode) {
         moveLeft();
       }
@@ -193,89 +189,84 @@ class GameScene: SKScene, SKSceneDelegate {
     }
     
     //used to "delay" frame rate
-    if(timer < 5) {
+    if(timer < delayRate) {
       timer += 1;
       return;
     }
     timer = 0; //reset timer
-
+    
     if(!gameover) {
       moveSnake();
       updateField();
     }
-    else if(!snakeGone){
-      killSnake();
+    else if(!snake.isDead){
+      snake.die();
+      food.removeFromParent();
     }
     else if(!gameOverPresented){
       presentGameOver();
     }
     holdSignals = false;
   }
-
+  
   func initScene() {
     //visually reset everything
     removeAllChildren();
-    direction = 3;
-    flashColor = 0;
-    numFlashes = 0;
+    snake.direction = 3;
     score = 0;
     timer = 0;
     gameover = false;
-    snakeGone = false;
     gameOverPresented = false;
+    snake.isDead = false; // :)
     
-    self.backgroundColor = UIColor.groupTableViewBackgroundColor();
+    self.backgroundColor = bgColor;
     
     initField();
     initSnake();
+    initFood();
     initGestures();
     initButtons();
   }
   
   func initSnake() {
-    snake.removeAll();
-    
-    snakeColor = gameViewController!.snakeModel!.snakeColor;
-    
-    for i in 0 ..< startSize {
-      let segment = SKShapeNode(rectOfSize: CGSize(width: pixelScale, height: pixelScale));
-      segment.position = CGPoint(x: fieldCenter.x - CGFloat(i * pixelScale), y: fieldCenter.y);
-      snake.append(segment);
-      addChild(snake[i]);
+    snake = Snake(length: startSize, color: snakeColor, position: field.position, direction: startDirection);
+
+    for i in 0 ..< snake.body.count {
+      addChild(snake.body[i]);
     }
-    updateColor();
   }
   
   func initField() {
     pixelOffset = CGFloat(pixelScale) / 2;
     
-    fieldCenter = CGPoint(x: frame.midX, y: frame.midY + 100); //needs to be here; cannot initialize with frame in declaration
-    minX = fieldCenter.x - CGFloat(fieldWidth/2);
-    maxX = fieldCenter.x + CGFloat(fieldWidth/2);
-    minY = fieldCenter.y - CGFloat(fieldHeight/2);
-    maxY = fieldCenter.y + CGFloat(fieldHeight/2);
-
     //add pixelScales to width & height to make positions centered
-    border = SKShapeNode(rectOfSize: CGSize(width: fieldWidth + pixelScale, height: fieldHeight + pixelScale));
-    border.fillColor = SKColor.whiteColor();
-    border.strokeColor = SKColor.whiteColor();
-    border.position = fieldCenter;
-    border.zPosition = CGFloat(-1);
-    addChild(border);
+    field = SKShapeNode(rectOfSize: CGSize(width: fieldWidth + pixelScale, height: fieldHeight + pixelScale));
+    field.fillColor = SKColor.whiteColor();
+    field.strokeColor = SKColor.whiteColor();
+    field.position = CGPoint(x: frame.midX, y: frame.midY + fieldOffset);
+    field.zPosition = CGFloat(-1);
+    addChild(field);
     
-    food = SKShapeNode(circleOfRadius: CGFloat(pixelScale/2));
-    food.fillColor = SKColor.greenColor();
-    food.position = randomPosition();
-    food.zPosition = 3;
-    addChild(food);
+    minX = field.position.x - CGFloat(fieldWidth/2);
+    maxX = field.position.x + CGFloat(fieldWidth/2);
+    minY = field.position.y - CGFloat(fieldHeight/2);
+    maxY = field.position.y + CGFloat(fieldHeight/2);
     
     scoreLabel = SKLabelNode(text: "SCORE: " + String(score));
     scoreLabel.position = CGPoint(x: minX, y: maxY + CGFloat(pixelScale));
     scoreLabel.fontName = "Futura";
     scoreLabel.fontSize = CGFloat(25);
-    scoreLabel.fontColor = UIColor.grayColor();
+    scoreLabel.fontColor = snakeColor;
     scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left;
     addChild(scoreLabel);
+  }
+  
+  func initFood() {
+    food = SKShapeNode(circleOfRadius: CGFloat(pixelScale/2));
+    food.fillColor = SKColor.greenColor();
+    food.position = randomPosition();
+    food.zPosition = 3;
+    addChild(food);
   }
   
   func initButtons() {
@@ -284,9 +275,9 @@ class GameScene: SKScene, SKSceneDelegate {
     
     pauseButton = SKButtonNode(width: CGFloat(fieldWidth) + pixelOffset * 2, height: CGFloat(fieldHeight) / 8, cornerRadius: CGFloat(2));
     pauseButton.setText("PAUSE");
-    pauseButton.setPos(CGPoint(x: fieldCenter.x, y: offsetMinY - (pauseButton.height / 2) - buttonSpace));
+    pauseButton.setPos(CGPoint(x: field.position.x, y: offsetMinY - (pauseButton.height / 2) - buttonSpace));
     pauseButton.setFont("Futura", fontSize: CGFloat(25), fontColor: UIColor.grayColor());
-    pauseButton.setStroke(2, color: UIColor.darkGrayColor());
+    pauseButton.setStroke(2, color: snakeColor);
     
     var upDownButtonHeight = pauseButton.minY - frame.minY; //halfway between bottom of field and bottom of screen
     upDownButtonHeight -= 3 * buttonSpace; //subtract space above/between/below buttons (10 each)
@@ -304,32 +295,24 @@ class GameScene: SKScene, SKSceneDelegate {
     leftRightButtonWidth /= 2;
     
     upButton = SKButtonNode(width: upDownButtonWidth, height: upDownButtonHeight, cornerRadius: CGFloat(4));
-    upButton.setText("UP");
-    upButton.setPos(CGPoint(x: fieldCenter.x, y: pauseButton.minY - upDownButtonHeight/2 - buttonSpace));
-    upButton.setFont("Futura", fontSize: CGFloat(25), fontColor: UIColor.grayColor());
-    upButton.setStroke(2, color: UIColor.grayColor());
-//    upButton.setFaceColor(UIColor.whiteColor());
+    upButton.setPos(CGPoint(x: field.position.x, y: pauseButton.minY - upDownButtonHeight/2 - buttonSpace));
+    upButton.setStroke(2, color: snakeColor);
+    upButton.setImage("Up Button.pdf", size: CGSize(width: 54, height: 26));
     
     downButton = SKButtonNode(width: upDownButtonWidth, height: upDownButtonHeight, cornerRadius: CGFloat(4));
-    downButton.setText("DOWN");
-    downButton.setPos(CGPoint(x: fieldCenter.x, y: upButton.shapeNode.position.y - upButton.height - buttonSpace)); //10 pixels button upButton
-    downButton.setFont("Futura", fontSize: CGFloat(25), fontColor: UIColor.grayColor());
-    downButton.setStroke(2, color: UIColor.grayColor());
-//    downButton.setFaceColor(UIColor.whiteColor());
+    downButton.setPos(CGPoint(x: field.position.x, y: upButton.shapeNode.position.y - upButton.height - buttonSpace));
+    downButton.setStroke(2, color: snakeColor);
+    downButton.setImage("Down Button.pdf", size: CGSize(width: 54, height: 26));
     
     leftButton = SKButtonNode(width: leftRightButtonWidth, height: leftRightButtonHeight, cornerRadius: CGFloat(4));
-    leftButton.setText("LEFT");
-    leftButton.setPos(CGPoint(x: fieldCenter.x - CGFloat(fieldWidth / 2) + (leftRightButtonWidth / 2) - pixelOffset, y: (pauseButton.minY - frame.minY) / 2));
-    leftButton.setFont("Futura", fontSize: CGFloat(25), fontColor: UIColor.grayColor());
-    leftButton.setStroke(2, color: UIColor.grayColor());
-//    leftButton.setFaceColor(UIColor.lightGrayColor());
+    leftButton.setPos(CGPoint(x: field.position.x - CGFloat(fieldWidth / 2) + (leftRightButtonWidth / 2) - pixelOffset, y: (pauseButton.minY - frame.minY) / 2));
+    leftButton.setStroke(2, color: snakeColor);
+    leftButton.setImage("Left Button.pdf", size: CGSize(width: 26, height: 54));
     
     rightButton = SKButtonNode(width: leftRightButtonWidth, height: leftRightButtonHeight, cornerRadius: CGFloat(4));
-    rightButton.setText("RIGHT");
-    rightButton.setPos(CGPoint(x: fieldCenter.x + CGFloat(fieldWidth / 2) - (leftRightButtonWidth / 2) + pixelOffset, y: (pauseButton.minY - frame.minY) / 2));
-    rightButton.setFont("Futura", fontSize: CGFloat(25), fontColor: UIColor.grayColor());
-    rightButton.setStroke(2, color: UIColor.grayColor());
-//    rightButton.setFaceColor(UIColor.lightGrayColor());
+    rightButton.setPos(CGPoint(x: field.position.x + CGFloat(fieldWidth / 2) - (leftRightButtonWidth / 2) + pixelOffset, y: (pauseButton.minY - frame.minY) / 2));
+    rightButton.setStroke(2, color: snakeColor);
+    rightButton.setImage("Right Button.pdf", size: CGSize(width: 26, height: 54));
     
     addChild(upButton);
     addChild(downButton);
@@ -340,53 +323,53 @@ class GameScene: SKScene, SKSceneDelegate {
   
   func initGestures() {
     //declare swipe gestures
-    swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedUp(_:)))
+    swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(OnePlayerGameScene.swipedUp(_:)))
     swipeUp.direction = .Up
     view!.addGestureRecognizer(swipeUp)
     
-    swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedDown(_:)))
+    swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(OnePlayerGameScene.swipedDown(_:)))
     swipeDown.direction = .Down
     view!.addGestureRecognizer(swipeDown)
     
-    swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedLeft(_:)))
+    swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(OnePlayerGameScene.swipedLeft(_:)))
     swipeLeft.direction = .Left
     view!.addGestureRecognizer(swipeLeft)
     
-    swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipedRight(_:)))
+    swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(OnePlayerGameScene.swipedRight(_:)))
     swipeRight.direction = .Right
     view!.addGestureRecognizer(swipeRight)
   }
   
   func moveSnake() {
     //move the rest of snake // 1 --> 0, 2 --> 1
-    for i in (1 ..< snake.count).reverse() {
-      snake[i].position = snake[i-1].position;
+    for i in (1 ..< snake.body.count).reverse() {
+      snake.body[i].position = snake.body[i-1].position;
     }
     
     //move head
-    switch(direction) {
+    switch(snake.direction) {
     case 0: //UP
-      snake[0].position.y += CGFloat(pixelScale);
-      if(snake[0].position.y > maxY) {
-        snake[0].position.y = minY;
+      snake.body[0].position.y += CGFloat(pixelScale);
+      if(snake.body[0].position.y > maxY) {
+        snake.body[0].position.y = minY;
       }
       break;
     case 1: //DOWN
-      snake[0].position.y -= CGFloat(pixelScale);
-      if(snake[0].position.y < minY) {
-        snake[0].position.y = maxY;
+      snake.body[0].position.y -= CGFloat(pixelScale);
+      if(snake.body[0].position.y < minY) {
+        snake.body[0].position.y = maxY;
       }
       break;
     case 2: //LEFT
-      snake[0].position.x -= CGFloat(pixelScale);
-      if(snake[0].position.x < minX) {
-        snake[0].position.x = maxX;
+      snake.body[0].position.x -= CGFloat(pixelScale);
+      if(snake.body[0].position.x < minX) {
+        snake.body[0].position.x = maxX;
       }
       break;
     case 3: //RIGHT
-      snake[0].position.x += CGFloat(pixelScale);
-      if(snake[0].position.x > maxX) {
-        snake[0].position.x = minX;
+      snake.body[0].position.x += CGFloat(pixelScale);
+      if(snake.body[0].position.x > maxX) {
+        snake.body[0].position.x = minX;
       }
       break;
     default: break
@@ -395,12 +378,12 @@ class GameScene: SKScene, SKSceneDelegate {
   
   func updateField() {
     //check if food was eaten
-    if(snake[0].position == food.position) {
+    if(snake.body[0].position == food.position) {
       food.position = randomPosition();
       
       //don't let food spawn in snake body location
-      for i in 1 ..< snake.count {
-        if(snake[i].position == food.position) {
+      for i in 1 ..< snake.body.count {
+        if(snake.body[i].position == food.position) {
           food.position = randomPosition();
         } else {
           break;
@@ -408,19 +391,17 @@ class GameScene: SKScene, SKSceneDelegate {
       }
       
       //update snake appearance (length & color)
-      let segment = SKShapeNode(rectOfSize: CGSize(width: pixelScale, height:pixelScale));
-      snake.append(segment);
-      addChild(snake[snake.count - 1]);
-      updateColor();
+      self.snake.grow();
+      self.addChild(snake.body[snake.body.count - 1]);
       
       //increment score
-      score += 10;
-      scoreLabel.text = "SCORE: " + String(score);
+      self.score += 10;
+      self.scoreLabel.text = "SCORE: " + String(score);
     }
     
     //check to see if we bit ourselves
-    for i in 1 ..< snake.count {
-      if(snake[0].position == snake[i].position) {
+    for i in 1 ..< snake.body.count {
+      if(snake.body[0].position == snake.body[i].position) {
         self.gameover = true;
       }
     }
@@ -429,51 +410,57 @@ class GameScene: SKScene, SKSceneDelegate {
   func randomPosition() -> CGPoint {
     let randX = CGFloat(arc4random_uniform(UInt32(fieldWidth/pixelScale))) - CGFloat(fieldWidth/2/pixelScale); //picks random int from -20 to 20
     let randY = CGFloat(arc4random_uniform(UInt32(fieldHeight/pixelScale))) - CGFloat(fieldHeight/2/pixelScale); //picks random int from -25 to 25
-    return CGPoint(x: fieldCenter.x + randX*CGFloat(pixelScale), y: fieldCenter.y + randY*CGFloat(pixelScale));
+    return CGPoint(x: field.position.x + randX*CGFloat(pixelScale), y: field.position.y + randY*CGFloat(pixelScale));
   }
   
-  func killSnake() {
-    //flash by moving border above/below everything repeatedly
-    if(numFlashes < 3) {
-      if(flashColor == 0) {
-        border.zPosition = 10; //place on top of everything
-        flashColor = 1; //color is white
-      }
-      else {
-        border.zPosition = -1;
-        flashColor = 0; //color is blue
-        numFlashes += 1;
-      }
-    }
-    else { //make snake disappear :(
-      food.removeFromParent(); //remove food too :[
-      if(snake.count > 0) {
-        snake[snake.count - 1].removeFromParent();
-        snake.removeLast();
-      }
-      else {
-        snakeGone = true; // :'(
-      }
-    }
+  func presentPaused() {
+    pausedLabel = SKLabelNode(text: "PAUSED");
+    pausedLabel.position = CGPoint(x: field.position.x, y: field.position.y);
+    pausedLabel.zPosition = 2;
+    pausedLabel.fontName = "Futura";
+    pausedLabel.fontSize = CGFloat(40);
+    pausedLabel.fontColor = SKColor.darkGrayColor();
+    
+    resumeButton = SKButtonNode(width: CGFloat(fieldWidth/3), height: 40, cornerRadius: CGFloat(2));
+    resumeButton.setText("RESUME");
+    resumeButton.setPos(CGPoint(x: field.position.x, y: pausedLabel.position.y - 30));
+    resumeButton.setStroke(2, color: SKColor.darkGrayColor());
+    resumeButton.setFont("Futura", fontSize: CGFloat(25), fontColor: SKColor.grayColor());
+    
+    quitButton = SKButtonNode(width: CGFloat(fieldWidth/3), height: 40, cornerRadius: CGFloat(2));
+    quitButton.setText("QUIT");
+    quitButton.setPos(CGPoint(x: field.position.x, y: resumeButton.labelNode.position.y - 50));
+    quitButton.setStroke(2, color: SKColor.darkGrayColor());
+    quitButton.setFont("Futura", fontSize: CGFloat(25), fontColor: SKColor.grayColor());
+
+    addChild(pausedLabel);
+    addChild(resumeButton);
+    addChild(quitButton);
   }
-  
+
+  func removePaused() {
+    pausedLabel.removeFromParent();
+    resumeButton.removeFromParent();
+    quitButton.removeFromParent();
+  }
+
   func presentGameOver() {
     let gameOverLabel = SKLabelNode(text: "GAME OVER");
-    gameOverLabel.position = CGPoint(x: fieldCenter.x, y: fieldCenter.y - 20);
+    gameOverLabel.position = CGPoint(x: field.position.x, y: field.position.y - 20);
     gameOverLabel.zPosition = 2;
     gameOverLabel.fontName = "Futura";
     gameOverLabel.fontSize = CGFloat(40);
     gameOverLabel.fontColor = SKColor.darkGrayColor();
     
     let endScoreLabel = SKLabelNode(text: String(score));
-    endScoreLabel.position = CGPoint(x: fieldCenter.x, y: gameOverLabel.position.y + 60);
+    endScoreLabel.position = CGPoint(x: field.position.x, y: gameOverLabel.position.y + 60);
     endScoreLabel.zPosition = 2;
     endScoreLabel.fontName = "Futura";
     endScoreLabel.fontSize = CGFloat(100);
-    endScoreLabel.fontColor = SKColor.grayColor();
+    endScoreLabel.fontColor = snakeColor;
     
     let endGamePromptLabel = SKLabelNode(text: "PLAY AGAIN?");
-    endGamePromptLabel.position = CGPoint(x: fieldCenter.x, y: gameOverLabel.position.y - 30);
+    endGamePromptLabel.position = CGPoint(x: field.position.x, y: gameOverLabel.position.y - 30);
     endGamePromptLabel.zPosition = 2;
     endGamePromptLabel.fontName = "Futura";
     endGamePromptLabel.fontSize = CGFloat(30);
@@ -481,14 +468,14 @@ class GameScene: SKScene, SKSceneDelegate {
     
     yesButton = SKButtonNode(width: 80, height: 40, cornerRadius: CGFloat(2));
     yesButton.setText("YES");
-    yesButton.setPos(CGPoint(x: fieldCenter.x - 50, y: endGamePromptLabel.position.y - 30));
-    yesButton.setStroke(1, color: SKColor.darkGrayColor());
+    yesButton.setPos(CGPoint(x: field.position.x - 50, y: endGamePromptLabel.position.y - 30));
+    yesButton.setStroke(2, color: SKColor.darkGrayColor());
     yesButton.setFont("Futura", fontSize: CGFloat(25), fontColor: SKColor.grayColor());
     
     noButton = SKButtonNode(width: 80, height: 40, cornerRadius: CGFloat(2));
     noButton.setText("NO");
-    noButton.setPos(CGPoint(x: fieldCenter.x + 50, y: endGamePromptLabel.position.y - 30));
-    noButton.setStroke(1, color: SKColor.darkGrayColor());
+    noButton.setPos(CGPoint(x: field.position.x + 50, y: endGamePromptLabel.position.y - 30));
+    noButton.setStroke(2, color: SKColor.darkGrayColor());
     noButton.setFont("Futura", fontSize: CGFloat(25), fontColor: SKColor.grayColor());
     
     addChild(gameOverLabel);
@@ -496,20 +483,8 @@ class GameScene: SKScene, SKSceneDelegate {
     addChild(endGamePromptLabel);
     addChild(yesButton);
     addChild(noButton);
-
+    
     gameOverPresented = true;
   }
   
-  //from head to tail will range from alpha:1 to alpha:0.25
-  func updateColor() {
-    alphaValue = 1;
-    alphaDecrementValue = CGFloat(0.75) / CGFloat(snake.count);
-    prevColor = snakeColor;
-    
-    for i in 0 ..< snake.count {
-      snake[i].fillColor = prevColor.colorWithAlphaComponent(alphaValue);
-      alphaValue -= alphaDecrementValue;
-      prevColor = snake[i].fillColor;
-    }
-  }
 }

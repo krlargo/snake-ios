@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class HighScoresViewContoller: UIViewController {  
+  
+  weak var snakeModel : SnakeModel?;
+
   override func viewDidLoad() {
     super.viewDidLoad()
   }
