@@ -10,11 +10,15 @@ import Foundation
 import SpriteKit
 import UIKit
 
+enum Direction {
+  case Up, Down, Left, Right
+}
+
 class Snake {
   var length = 0;
   var color = UIColor();
   var position = CGPoint(x: 0, y: 0); //the initial position of the snake's head
-  var direction = 0; //0: up, 1: down, 2: left, 3: right
+  var direction: Direction = .Up
   var body = [SKShapeNode]();
   var scale = 10;
   var isDead = false;
@@ -22,7 +26,7 @@ class Snake {
   
   init(){}
   
-  init(length: Int, color: UIColor, position: CGPoint, direction: Int) {
+  init(length: Int, color: UIColor, position: CGPoint, direction: Direction) {
     self.length = length;
     self.color = color;
     self.position = position;
@@ -30,28 +34,28 @@ class Snake {
 
     //starting directions determine where the rest of the snake's body is placed
     switch(direction) {
-    case 0: //UP
+    case .Up: 
       for i in 0 ..< length {
         let segment = SKShapeNode(rectOfSize: CGSize(width: scale, height: scale));
         segment.position = CGPoint(x: position.x, y: position.y - CGFloat(i * scale));
         body.append(segment);
       }
       break;
-    case 1: //DOWN
+    case .Down:
       for i in 0 ..< length {
         let segment = SKShapeNode(rectOfSize: CGSize(width: scale, height: scale));
         segment.position = CGPoint(x: position.x, y: position.y + CGFloat(i * scale));
         body.append(segment);
       }
       break;
-    case 2: //LEFT
+    case .Left:
       for i in 0 ..< length {
         let segment = SKShapeNode(rectOfSize: CGSize(width: scale, height: scale));
         segment.position = CGPoint(x: position.x + CGFloat(i * scale), y: position.y);
         body.append(segment);
       }
       break;
-    case 3: //RIGHT
+    case .Right: 
       for i in 0 ..< length {
         let segment = SKShapeNode(rectOfSize: CGSize(width: scale, height: scale));
         segment.position = CGPoint(x: position.x - CGFloat(i * scale), y: position.y);
