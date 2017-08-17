@@ -22,18 +22,18 @@ class SnakeModel {
 
   
   init() {
-    snakeColor = SKColor.grayColor();
+    snakeColor = SKColor.gray;
     delayRate = 5;
-    for i in 0 ..< 10 {
+    for _ in 0 ..< 10 {
       highScores.append(HighScore());
     }
   }
   
-  func storeScore(recentScore: Int) {
+  func storeScore(_ recentScore: Int) {
     for i in 0 ..< 10 {
       if(recentScore > highScores[i].score) {
         //shift scores down to make room for new highscore
-        for j in (i ..< 10).reverse() {
+        for j in (i ..< 10).reversed() {
           highScores[j] = highScores[j - 1];
         }
 

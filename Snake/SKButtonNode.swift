@@ -44,7 +44,7 @@ class SKButtonNode: SKNode {
   
   //size of actual button
   init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat) {
-    shapeNode = SKShapeNode(rectOfSize: CGSize(width: width, height: height), cornerRadius: cornerRadius);
+    shapeNode = SKShapeNode(rectOf: CGSize(width: width, height: height), cornerRadius: cornerRadius);
     labelNode = SKLabelNode(text: "");
     spriteNode = SKSpriteNode();
     
@@ -57,8 +57,8 @@ class SKButtonNode: SKNode {
     labelNode.zPosition = 2;
     
     //center label onto button
-    labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center;
-    labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center;
+    labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center;
+    labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center;
     
     minX = 0;
     midX = 0;
@@ -80,22 +80,22 @@ class SKButtonNode: SKNode {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func setImage(imageName: String, size: CGSize) {
+  func setImage(_ imageName: String, size: CGSize) {
     spriteNode.texture = SKTexture(imageNamed: imageName);
     spriteNode.size = size;
     spriteNode.zPosition = 2; //same zPos as labelNode; BELOW shapeNode
   }
   
-  func setText(text: String) {
+  func setText(_ text: String) {
     labelNode.text = text;
   }
   
-  func setStroke(borderWidth: CGFloat, color: SKColor) {
+  func setStroke(_ borderWidth: CGFloat, color: SKColor) {
     shapeNode.strokeColor = color;
     shapeNode.lineWidth = borderWidth;
   }
   
-  func setPos(point: CGPoint) {
+  func setPos(_ point: CGPoint) {
     shapeNode.position = point;
     labelNode.position = point;
     spriteNode.position = point;
@@ -109,7 +109,7 @@ class SKButtonNode: SKNode {
     midY = (minY + maxY) / 2;
   }
   
-  func setFont(fontName: String, fontSize: CGFloat, fontColor: SKColor) {
+  func setFont(_ fontName: String, fontSize: CGFloat, fontColor: SKColor) {
     labelNode.fontName = fontName;
     labelNode.fontSize = fontSize;
     labelNode.fontColor = fontColor;

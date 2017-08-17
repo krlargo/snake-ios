@@ -13,33 +13,32 @@ class StartScreenViewController: UIViewController {
   //main instantiation of SnakeModel
   var snakeModel = SnakeModel();
   
-  @IBAction func unwindToStartScreenView(segue: UIStoryboardSegue) {
+  @IBAction func unwindToStartScreenView(_ segue: UIStoryboardSegue) {
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     //pass SnakeModel to the game
     if(segue.identifier == "toOnePlayer") {
-      let onePlayerVC = segue.destinationViewController as! OnePlayerGameViewController;
+      let onePlayerVC = segue.destination as! OnePlayerGameViewController;
       onePlayerVC.snakeModel = snakeModel;
     }
       
     else if(segue.identifier == "toTwoPlayer") {
-      let twoPlayerVC = segue.destinationViewController as! TwoPlayerGameViewController;
+      let twoPlayerVC = segue.destination as! TwoPlayerGameViewController;
       twoPlayerVC.snakeModel = snakeModel;
     }
       
     else if(segue.identifier == "toHighScores") {
-      let highScoresVC = segue.destinationViewController as! HighScoresViewContoller;
+      let highScoresVC = segue.destination as! HighScoresViewContoller;
       highScoresVC.snakeModel = snakeModel;
     }
     
     else if(segue.identifier == "toSettings") {
-      let settingsVC = segue.destinationViewController as! SettingsViewController;
+      let settingsVC = segue.destination as! SettingsViewController;
       settingsVC.snakeModel = snakeModel;
     }
   }
 
-  
   override func viewDidLoad() {
     super.viewDidLoad()
 

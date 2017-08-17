@@ -15,7 +15,7 @@ class HighScore {
   var name = "";
   var score = 0;
   var position = [SKShapeNode]();
-  var color = UIColor.grayColor();;
+  var color = UIColor.gray;
 
   init(){}
   

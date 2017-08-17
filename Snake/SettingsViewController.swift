@@ -32,147 +32,147 @@ class SettingsViewController: UIViewController {
   @IBOutlet weak var winBy: UILabel!
   
   
-  @IBAction func blackButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.blackColor();
+  @IBAction func blackButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.black;
 
-    blackButton.layer.borderColor = UIColor.greenColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.green.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func purpleButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.purpleColor();
+  @IBAction func purpleButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.purple;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.greenColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.green.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func blueButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.blueColor();
+  @IBAction func blueButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.blue;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.greenColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.green.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func greenButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.greenColor();
+  @IBAction func greenButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.green;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.greenColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.green.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func yellowButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.yellowColor();
+  @IBAction func yellowButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.yellow;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.greenColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.green.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func orangeButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.orangeColor();
+  @IBAction func orangeButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.orange;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.greenColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.green.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
 
   }
   
-  @IBAction func redButtonSelected(sender: AnyObject) {
-    snakeModel!.snakeColor = SKColor.redColor();
+  @IBAction func redButtonSelected(_ sender: AnyObject) {
+    snakeModel!.snakeColor = SKColor.red;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.greenColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.green.cgColor;
 
   }
   
-  @IBAction func decDifficulty(sender: AnyObject) {
+  @IBAction func decDifficulty(_ sender: AnyObject) {
     if(snakeModel!.delayRate < 7) {
       snakeModel!.delayRate += 2;
       updateDifficultyText();
     }
   }
 
-  @IBAction func incDifficulty(sender: AnyObject) {
+  @IBAction func incDifficulty(_ sender: AnyObject) {
     if(snakeModel!.delayRate > 3) {
       snakeModel!.delayRate -= 2;
       updateDifficultyText();
     }
   }
   
-  @IBAction func decScreenHeight(sender: AnyObject) {
+  @IBAction func decScreenHeight(_ sender: AnyObject) {
     if(snakeModel!.fieldHeight > 200) {
       snakeModel!.fieldHeight -= 100;
       updateScreenSizeText();
     }
   }
 
-  @IBAction func incScreenHeight(sender: AnyObject) {
+  @IBAction func incScreenHeight(_ sender: AnyObject) {
     if(snakeModel!.fieldHeight < 400) {
       snakeModel!.fieldHeight += 100;
       updateScreenSizeText();
     }
   }
 
-  @IBAction func decScoreToWin(sender: AnyObject) {
+  @IBAction func decScoreToWin(_ sender: AnyObject) {
     if(snakeModel!.scoreToWin > 50) {
       snakeModel!.scoreToWin -= 10;
       scoreToWin.text = String(snakeModel!.scoreToWin);
     }
   }
 
-  @IBAction func incScoreToWin(sender: AnyObject) {
+  @IBAction func incScoreToWin(_ sender: AnyObject) {
     if(snakeModel!.scoreToWin < 2000) {
       snakeModel!.scoreToWin += 10;
       scoreToWin.text = String(snakeModel!.scoreToWin);
     }
   }
 
-  @IBAction func decWinBy(sender: AnyObject) {
+  @IBAction func decWinBy(_ sender: AnyObject) {
     if(snakeModel!.winBy > 0) {
       snakeModel!.winBy -= 10;
       winBy.text = String(snakeModel!.winBy);
     }
   }
   
-  @IBAction func incWinBy(sender: AnyObject) {
+  @IBAction func incWinBy(_ sender: AnyObject) {
     if(snakeModel!.winBy < 1000) {
       snakeModel!.winBy += 10;
       winBy.text = String(snakeModel!.winBy);
@@ -191,13 +191,13 @@ class SettingsViewController: UIViewController {
     orangeButton.layer.borderWidth = 2;
     redButton.layer.borderWidth = 2;
     
-    blackButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    purpleButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    blueButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    greenButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    yellowButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    orangeButton.layer.borderColor = UIColor.whiteColor().CGColor;
-    redButton.layer.borderColor = UIColor.whiteColor().CGColor;
+    blackButton.layer.borderColor = UIColor.white.cgColor;
+    purpleButton.layer.borderColor = UIColor.white.cgColor;
+    blueButton.layer.borderColor = UIColor.white.cgColor;
+    greenButton.layer.borderColor = UIColor.white.cgColor;
+    yellowButton.layer.borderColor = UIColor.white.cgColor;
+    orangeButton.layer.borderColor = UIColor.white.cgColor;
+    redButton.layer.borderColor = UIColor.white.cgColor;
     
     updateDifficultyText();
     updateScreenSizeText();
